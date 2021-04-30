@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+
+   
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.rtl.only.min.css" />
+    <link rel="stylesheet" href="css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="css/vendor/component-custom-switch.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" 
+integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="/js/ajaxservice.js"></script>
+<script>
+function tableLoad(){
+	$.ajax({
+        type: 'GET',
+        url: 'http://localhost:8086/student/listall',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+
+        	for(var i=0;i<data.length;i++) 
+        	{ 
+        		var Html="<tr> <td>"+data[i].id+"</td> <td>"+data[i].name+"</td> </tr>";
+        		$('#studenttablebody').append(Html);
+        	} 
+        } ,
+        error: function (e) {
+
+          console.dir(e);
+
+        }
+    }); 
+}
+</script>
+</head>
+<body onload="tableLoad()">
+    
+    <div class="row">
+                <div class="col-md-4 offset-md-3">
+                    <div class="card" style="margin-top:50px">
+                        <div class="card-body">
+                            <h5 class="card-title">Basic Table</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Name</th>    
+                                    </tr>
+                                </thead>
+                                <tbody id="studenttablebody">
+                                                                       
+                                              
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+</body>
+</html>
